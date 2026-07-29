@@ -9,6 +9,7 @@ export interface Order {
     id: string;
     customerName: string;
     items: Item[];
+    notes?: string;
 }
 
 export interface OrderEvent {

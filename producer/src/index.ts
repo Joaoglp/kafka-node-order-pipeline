@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 app.post('/orders', async (req: Request, res: Response) => {
     try {
-        const { customerName, channel, items } = req.body;
+        const { customerName, channel, items, notes } = req.body;
 
         if (!customerName || !channel || !items || !Array.isArray(items)) {
             return res.status(400).json({
@@ -22,13 +22,14 @@ app.post('/orders', async (req: Request, res: Response) => {
             id: randomUUID(),
             customerName,
             items,
+            notes
         };
 
         const orderEvent: OrderEvent = {
             id: randomUUID(),
             order: order,
             channel,
-            timestamp: new Date().toISOString(),
+            timestamp: new Date().toISOString()
         };
 
         const producer = await getProducer();
