@@ -3,7 +3,7 @@
 ## Status: Ongoing
 
 - ~~Kafka + Zookeeper running locally via Docker Compose~~
-- Producer service (Express + TypeScript) publishing order events
+- ~~Producer service (Express + TypeScript) publishing order events~~
 - Consumer service processing events and calling the Claude API for analysis
 - End-to-end test run
 
