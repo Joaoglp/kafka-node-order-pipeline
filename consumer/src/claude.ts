@@ -7,7 +7,7 @@ const MODEL = 'claude-sonnet-4-6';
 
 const MAX_TOKENS = 1024;
 
-function extractJson(raw: string): string {
+export function extractJson(raw: string): string {
     const jsonMatch = raw.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
     return jsonMatch ? jsonMatch[1] : raw.trim();
 }
@@ -50,7 +50,7 @@ export async function analyzeOrder(order: Order): Promise<OrderAnalysis> {
         throw new Error('No text response from Claude.');
     }
     
-    console.log('Raw Claude response:', text.text);
+    // console.log('Raw Claude response:', text.text);
 
     try {
         const analysis: OrderAnalysis = JSON.parse(extractJson(text.text));
