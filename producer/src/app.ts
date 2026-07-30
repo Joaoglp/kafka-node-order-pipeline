@@ -55,13 +55,3 @@ app.post('/orders', async (req: Request, res: Response) => {
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' });
 });
-
-// curl -X POST http://localhost:3000/orders \
-//   -H "Content-Type: application/json" \
-//   -d '{
-//     "customerName": "TEST",
-//     "channel": "B2B",
-//     "items": [
-//       { "id": "001", "description": "TEST", "quantity": 50, "price": 100 }
-//     ]
-//   }'
