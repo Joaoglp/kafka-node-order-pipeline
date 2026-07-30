@@ -1,8 +1,8 @@
-import { Kafka, Producer } from "kafkajs";
+import { Kafka, Producer } from 'kafkajs';
 
 const kafka = new Kafka({
   clientId: 'producer',
-  brokers: [process.env.KAFKA_BROKER || 'localhost:9092']
+  brokers: [process.env.KAFKA_BROKER || 'localhost:9092'],
 });
 
 let producer: Producer | null = null;

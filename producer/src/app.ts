@@ -7,47 +7,53 @@ export const app = express();
 app.use(express.json());
 
 app.post('/orders', async (req: Request, res: Response) => {
-    try {
-        const { customerName, channel, items, notes } = req.body;
+  try {
+    const { customerName, channel, items, notes } = req.body;
 
-        if (!customerName || !channel || !items || !Array.isArray(items) || items.length === 0) {
-            return res.status(400).json({
-                error: 'customerName, channel and a non-empty items[] array are required',
-            });
-        }
-
-        const order: Order = {
-            id: randomUUID(),
-            customerName,
-            items,
-            notes
-        };
-
-        const orderEvent: OrderEvent = {
-            id: randomUUID(),
-            order: order,
-            channel,
-            timestamp: new Date().toISOString()
-        };
-
-        const producer = await getProducer();
-
-        await producer.send({
-            topic: ORDER_CREATED_TOPIC,
-            messages: [{ key: orderEvent.id, value: JSON.stringify(orderEvent) }],
-        });
-
-        // console.log(`Published order ${orderEvent.id} to ${ORDER_CREATED_TOPIC}`);
-        res.status(202).json({ orderId: order.id, status: 'published' });
-
-    } catch (error) {
-        // console.error('Error creating order:', error);
-        res.status(500).json({ error: 'Failed to publish order event' });
+    if (
+      !customerName ||
+      !channel ||
+      !items ||
+      !Array.isArray(items) ||
+      items.length === 0
+    ) {
+      return res.status(400).json({
+        error:
+          'customerName, channel and a non-empty items[] array are required',
+      });
     }
+
+    const order: Order = {
+      id: randomUUID(),
+      customerName,
+      items,
+      notes,
+    };
+
+    const orderEvent: OrderEvent = {
+      id: randomUUID(),
+      order: order,
+      channel,
+      timestamp: new Date().toISOString(),
+    };
+
+    const producer = await getProducer();
+
+    await producer.send({
+      topic: ORDER_CREATED_TOPIC,
+      messages: [{ key: orderEvent.id, value: JSON.stringify(orderEvent) }],
+    });
+
+    // console.log(`Published order ${orderEvent.id} to ${ORDER_CREATED_TOPIC}`);
+    res.status(202).json({ orderId: order.id, status: 'published' });
+  } catch (error) {
+    // console.error('Error creating order:', error);
+    res.status(500).json({ error: 'Failed to publish order event' });
+  }
 });
 
 app.get('/health', (req: Request, res: Response) => {
-    res.status(200).json({ status: 'ok' });
+  res.status(200).json({ status: 'ok' });
 });
 
 // curl -X POST http://localhost:3000/orders \
