@@ -45,13 +45,15 @@ npm run dev
 
 ### 3. Start the producer
 
+```bash
 cd producer
-create .env file
-add port and kafka broker
+```
+Create a `.env` file with:
 
-e.g:
+```
 PORT=3000
 KAFKA_BROKER=localhost:9092
+```
 
 ```bash
 npm install
@@ -60,6 +62,7 @@ npm run dev
 
 ### Test Order
 
+```bash
 curl -X POST http://localhost:3000/orders \
   -H "Content-Type: application/json" \
   -d '{
@@ -69,13 +72,18 @@ curl -X POST http://localhost:3000/orders \
     { "id": "001", "description": "TEST", "quantity": 50, "price": 100 }
   ]
 }'
+```
 
 ### Running tests
 
+```bash
 cd producer && npm run test
 cd consumer && npm run test
+```
 
 ### Prettify code
 
+```bash
 cd producer && npm run format
 cd consumer && npm run format
+```
