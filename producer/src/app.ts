@@ -10,7 +10,7 @@ app.post('/orders', async (req: Request, res: Response) => {
     try {
         const { customerName, channel, items, notes } = req.body;
 
-        if (!customerName || !channel || !items || !Array.isArray(items)) {
+        if (!customerName || !channel || !items || !Array.isArray(items) || items.length === 0) {
             return res.status(400).json({
                 error: 'customerName, channel and a non-empty items[] array are required',
             });
