@@ -4,8 +4,8 @@
 
 - ~~Kafka + Zookeeper running locally via Docker Compose~~
 - ~~Producer service (Express + TypeScript) publishing order events~~
-- Consumer service processing events and calling the Claude API for analysis
-- End-to-end test run
+- ~~Consumer service processing events and calling the Claude API for analysis~~
+- ~~End-to-end test run~~
 
 ## What it will do
 
@@ -19,9 +19,9 @@ Node.js, TypeScript, Express, KafkaJS, Anthropic SDK (Claude), Docker
 ## Running it locally
 
 ### 1. Start Kafka
-\`\`\`bash
+
 docker compose up -d
-\`\`\`
+
 Kafka UI available at http://localhost:8080
 
 (Producer and consumer setup instructions pending)
